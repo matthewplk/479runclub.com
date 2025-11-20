@@ -29,7 +29,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <main className="max-w-4xl mx-auto p-4">{children}</main>
+        <div className="page-fade">
+          <main className="max-w-4xl mx-auto p-4">{children}</main>
+        </div>
       </body>
     </html>
   );

@@ -26,26 +26,26 @@ const Navbar = () => {
             className="group flex items-center gap-3 hover:scale-105 transition-transform duration-300"
           >
             {/* Image Container with white backdrop for contrast against red */}
-            <div className="relative w-20 h-20  rounded-full  shadow-sm group-hover:shadow-md transition-all">
+            <div className="relative w-24 h-24  rounded-full  shadow-sm group-hover:shadow-md transition-all">
                {/* Ensure you have the file at public/branding/logo.png */}
                <Image 
                  src="/branding/479runclub_logo.PNG" 
                  alt="479 Run Club Logo"
                  fill
                  className="object-cover"
-                 sizes="160px"
+                 sizes="200px"
                />
             </div>
 
             {/* Text Logo */}
-            <span className="text-xl font-bold text-gray-900 group-hover:shadow-md-rounded transition-all">
+            <span className="text-4xl font-extrabold text-white transform -skew-x-12 tracking-wide">
               479 Run Club
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/about" className="text-gray-900 font-bold relative group">
+            <Link href="/about" className="text-white font-bold relative group">
               <span className="relative z-10">About</span>
               {/* Dark hover effect instead of white */}
               <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
@@ -55,9 +55,27 @@ const Navbar = () => {
 
             <Link
               href="/events"
-              className="text-gray-900 font-bold relative group"
+              className="text-white font-bold relative group"
             >
               <span className="relative z-10">Events</span>
+              <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+            </Link>
+
+             <Link
+              href="/join"
+              className="text-white font-bold relative group"
+            >
+              <span className="relative z-10">Join</span>
+              <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+            </Link>
+
+             <Link
+              href="/gallery"
+              className="text-white font-bold relative group"
+            >
+              <span className="relative z-10">Gallery</span>
               <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
             </Link>
