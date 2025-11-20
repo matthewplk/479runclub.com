@@ -29,7 +29,7 @@ const Navbar = () => {
             <div className="relative w-20 h-20  rounded-full  shadow-sm group-hover:shadow-md transition-all">
                {/* Ensure you have the file at public/branding/logo.png */}
                <Image 
-                 src="/branding/479runclub_logo.png" 
+                 src="/branding/479runclub_logo.PNG" 
                  alt="479 Run Club Logo"
                  fill
                  className="object-cover"
