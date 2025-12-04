@@ -46,38 +46,38 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <Link href="/about" className="text-white font-bold relative group">
-              <span className="relative z-10">About</span>
+              <span className="relative z-10">Meet The Staff</span>
               {/* Dark hover effect instead of white */}
               <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
               {/* Black underline */}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
             </Link>
 
             <Link
               href="/events"
               className="text-white font-bold relative group"
             >
-              <span className="relative z-10">Events</span>
+              <span className="relative z-10">Upcoming Events</span>
               <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
             </Link>
 
              <Link
               href="/join"
               className="text-white font-bold relative group"
             >
-              <span className="relative z-10">Join</span>
+              <span className="relative z-10">Partnerships</span>
               <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
             </Link>
 
              <Link
               href="/gallery"
               className="text-white font-bold relative group"
             >
-              <span className="relative z-10">Gallery</span>
+              <span className="relative z-10">Contact Us</span>
               <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
             </Link>
           </div>
 

@@ -12,31 +12,29 @@ type DayInfo = {
   dayLabel: string;
   dateLabel: string;
   run: RunInfo | null;
-  isToday: boolean; // 1. Added this field
+  isToday: boolean;
 };
 
 function getWeekDays(): DayInfo[] {
   const today = new Date();
-
-  // Find Sunday of the current week
-  const startOfWeek = new Date(today);
-  startOfWeek.setHours(0, 0, 0, 0);
-  const dayOfWeek = startOfWeek.getDay(); // 0 = Sun, 6 = Sat
-  startOfWeek.setDate(startOfWeek.getDate() - dayOfWeek);
+  // Reset time to midnight to ensure accurate comparisons
+  today.setHours(0, 0, 0, 0);
 
   const days: DayInfo[] = [];
 
+  // Loop 0 to 6 (0 being today, 1 being tomorrow, etc.)
   for (let i = 0; i < 7; i++) {
-    const date = new Date(startOfWeek);
-    date.setDate(startOfWeek.getDate() + i);
+    const date = new Date(today);
+    date.setDate(today.getDate() + i); // Start at today, add 'i' days
 
     const weekdayIndex = date.getDay();
     const month = date.toLocaleString("default", { month: "short" });
     const dayNum = date.getDate();
 
-    // 2. Check if this specific date is actually "Today"
-    const isToday = date.toDateString() === today.toDateString();
-
+    // Since i=0 is the start, the first item is always "Today"
+    const isToday = i === 0; 
+    
+    // Check if the specific date being generated is a Saturday (6)
     const isSaturday = weekdayIndex === 6;
 
     days.push({
@@ -64,7 +62,7 @@ export default function CalendarBanner() {
       <div className="max-w-6xl mx-auto px-4 rounded-4xl">
         {/* Header */}
         <h2 className="text-2xl font-extrabold tracking-wide mb-4">
-          This Week’s Schedule
+          Upcoming Schedule
         </h2>
 
         {/* Calendar Grid */}
@@ -72,15 +70,16 @@ export default function CalendarBanner() {
           {days.map((d, idx) => (
             <div
               key={idx}
-              // 3. Changed condition from `d.run` to `d.isToday`
-              className={`p-4 rounded-xl border border-white/20 ${
+              className={`p-4 rounded-xl border border-white/20 transition-all duration-300 ease-in-out ${
                 d.isToday
-                  ? "bg-white/10 backdrop-blur-md shadow-xl ring-2 ring-white/30 scale-110 border-white"
-                  : "bg-white/5 backdrop-blur-sm"
+                  ? "bg-white/30 backdrop-blur-md shadow-2xl scale-110 z-10 ring-1 ring-white border-white"
+                  : "bg-white/5 backdrop-blur-sm hover:bg-white/10"
               }`}
             >
               {/* Day name */}
-              <div className="font-semibold opacity-80">{d.dayLabel}</div>
+              <div className="font-semibold opacity-80">
+                {d.isToday ? "Today" : d.dayLabel}
+              </div>
 
               {/* Date */}
               <div className="text-xs opacity-90">{d.dateLabel}</div>

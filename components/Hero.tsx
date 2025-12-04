@@ -1,24 +1,27 @@
 export default function Hero() {
   return (
     <section className="text-center ">
-     <main className="relative z-5 min-h-screen flex justify-center px-4 ">
+     <main className="relative z-10 min-h-screen flex justify-center px-4 ">
       {/* White “space” area on top of collage */}
       <section className="
-        w-full max-w-5xl 
+        w-full max-w-7xl 
         bg-white/85 
         backdrop-blur-sm 
         rounded-3xl 
         shadow-2xl 
         border border-slate-200/70 
         p-8 sm:p-10
-        space-y-8
+        space-y-6
       ">
         <header>
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
-            479 Run Club
+            About Us
           </h1>
           <p className="mt-3 text-slate-700">
-            Weekly group runs in NWA. All paces welcome.
+            479 Run Club is a community-first social running group in Northwest Arkansas, created with one simple idea in mind: movement is easier when you don’t have to do it alone.<br />
+            We welcome all paces, all backgrounds, and all goals. Whether you’re training for your first race or just looking to meet new people, you’ll find a supportive, uplifting group ready to cheer you on.
+            We meet throughout Fayetteville, Springdale, Bentonville and the surrounding area, exploring local trails, discovering new coffee shops and restaurants, and building real friendships along the way.
+            At 479, running is just the beginning of connections, encouragement, and community that are at the heart of what we do.
           </p>
         </header>
 

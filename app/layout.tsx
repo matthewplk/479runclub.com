@@ -33,10 +33,10 @@ export default function RootLayout({
       >
         <Analytics/>
         {/* Background collage */}
-          <RunCollage />
+        <RunCollage />
         <Navbar />
         <div className="page-fade">
-          <main className="max-w-4xl mx-auto p-4">{children}</main>
+          <main className="max-w-7xl mx-auto p-4">{children}</main>
         </div>
       </body>
     </html>
