@@ -46,7 +46,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <Link href="/about" className="text-white font-bold relative group">
-              <span className="relative z-10">Meet The Staff</span>
+              <span className="relative z-10">Meet The Runners</span>
               {/* Dark hover effect instead of white */}
               <span className="absolute inset-0 bg-black/0 group-hover:bg-black/5 rounded-lg transition-all duration-300 -m-2 p-2"></span>
               {/* Black underline */}

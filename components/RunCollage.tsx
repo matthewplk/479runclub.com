@@ -1,4 +1,5 @@
-// app/components/RunCollageBackground.tsx
+// app/components/RunCollageBackground.tsx/
+//Potential future fix would be exporting to Photoshop, Canva, Figma, etc. and then importing as a single image instead of using the collage component. This would reduce load time and make it easier to maintain.
 "use client";
 
 import Image from "next/image";
@@ -7,24 +8,25 @@ const photos = [
   "/group/rungroup1.JPG",
   "/group/rungroup2.JPG",
   "/group/rungroup3.JPG",
-  "/group/rungroup4.jpg",
-  "/group/rungroup5.jpg",
-  "/group/rungroup6.jpg",
-  "/group/rungroup7.jpg",
-  "/group/rungroup8.jpg",
-  "/group/rungroup9.jpg",
-  "/group/rungroup10.jpg",
-  "/group/rungroup11.jpg",
-  "/group/rungroup12.jpg",
-  "/group/rungroup13.jpg",
-  "/group/rungroup14.jpg",
-  "/group/rungroup15.jpg",
-  "/group/rungroup16.jpg",
-  "/group/rungroup17.jpg",
-  "/group/rungroup18.jpg",
-  "/group/rungroup19.jpg",
-  "/group/rungroup20.jpg"
+  "/group/rungroup4.JPG",
+  "/group/rungroup5.JPG",
+  "/group/rungroup6.JPG",
+  "/group/rungroup7.JPG",
+  "/group/rungroup8.JPG",
+  "/group/rungroup9.JPG",
+  "/group/rungroup10.JPG",
+  "/group/rungroup11.JPG",
+  "/group/rungroup12.JPG",
+  "/group/rungroup13.JPG",
+  "/group/rungroup14.JPG",
+  "/group/rungroup15.JPG",
+  "/group/rungroup16.JPG",
+  "/group/rungroup17.JPG",
+  "/group/rungroup18.JPG",
+  "/group/rungroup19.JPG",
+  "/group/rungroup20.JPG",
 ];
+
 
 const rotations = [
   "rotate-[-3deg]",
@@ -54,6 +56,7 @@ export default function RunCollage() {
             <Image
               src={src}
               alt="479 Run Club group run"
+            
               fill
               className="object-cover grayscale"
             />
