@@ -1,4 +1,4 @@
-import { getScheduleFromSheet, RunEvent } from "@/lib/sheets";
+import { getScheduleFromSheet, RunEvent } from "../lib/sheets";
 
 const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
