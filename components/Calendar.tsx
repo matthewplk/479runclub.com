@@ -1,103 +1,81 @@
-"use client";
+import { getScheduleFromSheet, RunEvent } from "@/lib/sheets";
 
 const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-type RunInfo = {
-  time: string;
-  title: string;
-  location: string;
-};
-
-type DayInfo = {
-  dayLabel: string;
-  dateLabel: string;
-  run: RunInfo | null;
-  isToday: boolean;
-};
-
-function getWeekDays(): DayInfo[] {
+function getNext7Days(): { dayLabel: string; dateLabel: string; dateISO: string; isToday: boolean }[] {
   const today = new Date();
-  // Reset time to midnight to ensure accurate comparisons
   today.setHours(0, 0, 0, 0);
+  const days = [];
 
-  const days: DayInfo[] = [];
-
-  // Loop 0 to 6 (0 being today, 1 being tomorrow, etc.)
   for (let i = 0; i < 7; i++) {
     const date = new Date(today);
-    date.setDate(today.getDate() + i); // Start at today, add 'i' days
+    date.setDate(today.getDate() + i);
 
-    const weekdayIndex = date.getDay();
     const month = date.toLocaleString("default", { month: "short" });
     const dayNum = date.getDate();
-
-    // Since i=0 is the start, the first item is always "Today"
-    const isToday = i === 0; 
-    
-    // Check if the specific date being generated is a Saturday (6)
-    const isSaturday = weekdayIndex === 6;
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const dd = String(date.getDate()).padStart(2, "0");
 
     days.push({
-      dayLabel: weekdayNames[weekdayIndex],
+      dayLabel: weekdayNames[date.getDay()],
       dateLabel: `${month} ${dayNum}`,
-      isToday: isToday,
-      run: isSaturday
-        ? {
-            time: "8:00 AM",
-            title: "Group Run",
-            location: "Gulley Park",
-          }
-        : null,
+      dateISO: `${yyyy}-${mm}-${dd}`,
+      isToday: i === 0,
     });
   }
 
   return days;
 }
 
-export default function CalendarBanner() {
-  const days = getWeekDays();
+export default async function CalendarBanner() {
+  const events = await getScheduleFromSheet();
+  const days = getNext7Days();
+
+  // Build a lookup: dateISO -> first event that day
+  const eventsByDate: Record<string, RunEvent> = {};
+  for (const event of events) {
+    if (!eventsByDate[event.date]) {
+      eventsByDate[event.date] = event;
+    }
+  }
 
   return (
     <div className="w-full bg-gradient-to-r from-[#F03B28] to-[#FF6666] text-white py-6 shadow-lg rounded-2xl">
       <div className="max-w-6xl mx-auto px-4 rounded-4xl">
-        {/* Header */}
         <h2 className="text-2xl font-extrabold tracking-wide mb-4">
           Upcoming Schedule
         </h2>
 
-        {/* Calendar Grid */}
         <div className="grid grid-cols-7 gap-3 text-center text-sm">
-          {days.map((d, idx) => (
-            <div
-              key={idx}
-              className={`p-4 rounded-xl border border-white/20 transition-all duration-300 ease-in-out ${
-                d.isToday
-                  ? "bg-white/30 backdrop-blur-md shadow-2xl scale-110 z-10 ring-1 ring-white border-white"
-                  : "bg-white/5 backdrop-blur-sm hover:bg-white/10"
-              }`}
-            >
-              {/* Day name */}
-              <div className="font-semibold opacity-80">
-                {d.isToday ? "Today" : d.dayLabel}
-              </div>
-
-              {/* Date */}
-              <div className="text-xs opacity-90">{d.dateLabel}</div>
-
-              {/* Run info or dash */}
-              {d.run ? (
-                <div className="mt-2">
-                  <div className="text-base font-bold">{d.run.time}</div>
-                  <div className="text-xs">{d.run.title}</div>
-                  <div className="text-[0.7rem] opacity-80">
-                    {d.run.location}
-                  </div>
+          {days.map((d, idx) => {
+            const run = eventsByDate[d.dateISO] ?? null;
+            return (
+              <div
+                key={idx}
+                className={`p-4 rounded-xl border border-white/20 transition-all duration-300 ease-in-out ${
+                  d.isToday
+                    ? "bg-white/30 backdrop-blur-md shadow-2xl scale-110 z-10 ring-1 ring-white border-white"
+                    : "bg-white/5 backdrop-blur-sm hover:bg-white/10"
+                }`}
+              >
+                <div className="font-semibold opacity-80">
+                  {d.isToday ? "Today" : d.dayLabel}
                 </div>
-              ) : (
-                <div className="mt-3 text-[0.7rem] opacity-40">—</div>
-              )}
-            </div>
-          ))}
+                <div className="text-xs opacity-90">{d.dateLabel}</div>
+
+                {run ? (
+                  <div className="mt-2">
+                    <div className="text-base font-bold">{run.time}</div>
+                    <div className="text-xs">{run.title}</div>
+                    <div className="text-[0.7rem] opacity-80">{run.location}</div>
+                  </div>
+                ) : (
+                  <div className="mt-3 text-[0.7rem] opacity-40">—</div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
