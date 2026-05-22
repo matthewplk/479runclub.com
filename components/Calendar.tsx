@@ -41,7 +41,7 @@ export default async function CalendarBanner() {
   }
 
   return (
-    <div className="w-full bg-gradient-to-r from-[#F03B28] to-[#FF6666] text-white py-6 shadow-lg rounded-2xl">
+    <div className="w-full bg-linear-to-r from-[#F03B28] to-[#FF6666] text-white py-6 shadow-lg rounded-2xl">
       <div className="max-w-6xl mx-auto px-4 rounded-4xl">
         <h2 className="text-2xl font-extrabold tracking-wide mb-4">
           Upcoming Schedule
