@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getScheduleFromSheet, RunEvent } from "@/lib/sheets";
+import { getScheduleFromSheet, RunEvent } from "../../lib/sheets";
 
 function formatDate(dateISO: string) {
   const date = new Date(`${dateISO}T12:00:00`);
