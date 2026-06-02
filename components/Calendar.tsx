@@ -32,6 +32,9 @@ export default async function CalendarBanner() {
   const events = await getScheduleFromSheet();
   const days = getNext7Days();
 
+  console.log("Raw events:", events);        // see what dates look like coming in
+  console.log("Days ISO:", days.map(d => d.dateISO));  // see what calendar expects
+
   // Build a lookup: dateISO -> first event that day
   const eventsByDate: Record<string, RunEvent> = {};
   for (const event of events) {

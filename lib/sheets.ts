@@ -18,12 +18,17 @@ function rowToEvent(row: string[], index: number): RunEvent | null {
   // Skip rows missing required fields
   if (!date || !time || !title || !location) return null;
 
+
+  const rawType = type?.trim() ?? "";
   const validTypes = ["Group Run", "Workout", "Social", "Race", "Other"];
-  const eventType = validTypes.includes(type) ? type : "Other";
+  const eventType = (validTypes.find(t => rawType.includes(t)) ?? "Other") as RunEvent["type"];
+  //const validTypes = ["Group Run", "Workout", "Social", "Race", "Other"];
+  //const eventType = validTypes.find(t => rawType.includes(t)) ?? "Other";
+  //const eventType = validTypes.includes(type) ? type : "Other";
 
   return {
     id: `event-${index}-${date}`,
-    date: date.trim(),
+    date: parseSheetDate(date),
     time: time.trim(),
     title: title.trim(),
     location: location.trim(),
@@ -33,6 +38,14 @@ function rowToEvent(row: string[], index: number): RunEvent | null {
     ctaLabel: ctaLabel?.trim() || undefined,
     ctaHref: ctaHref?.trim() || undefined,
   };
+}
+
+function parseSheetDate(raw: string): string {
+  const parts = raw.trim().split("/");
+  if (parts.length !== 3) return raw;
+  const [m, d, y] = parts;
+  const fullYear = y.length === 2 ? `20${y}` : y;
+  return `${fullYear}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
 }
 
 export async function getScheduleFromSheet(): Promise<RunEvent[]> {
