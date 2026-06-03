@@ -3,7 +3,9 @@ import { getScheduleFromSheet, RunEvent } from "../lib/sheets";
 const weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function getNext7Days(): { dayLabel: string; dateLabel: string; dateISO: string; isToday: boolean }[] {
-  const today = new Date();
+  const today = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/Chicago" })
+  );
   today.setHours(0, 0, 0, 0);
   const days = [];
 
