@@ -52,15 +52,15 @@ export default async function CalendarBanner() {
           Upcoming Schedule
         </h2>
 
-        <div className="grid grid-cols-7 gap-3 text-center text-sm">
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-pl-7 pb-5 -mx-4 pl-7 pr-4 sm:mx-0 sm:pl-0 sm:pr-0 sm:scroll-pl-0 sm:grid sm:grid-cols-7 sm:overflow-visible sm:pb-0 text-center text-sm">
           {days.map((d, idx) => {
             const run = eventsByDate[d.dateISO] ?? null;
             return (
               <div
                 key={idx}
-                className={`p-4 rounded-xl border border-white/20 transition-all duration-300 ease-in-out ${
+                className={`shrink-0 w-24 sm:w-auto min-h-[112px] sm:min-h-0 flex flex-col items-center justify-center snap-start p-4 rounded-xl border border-white/20 transition-all duration-300 ease-in-out ${
                   d.isToday
-                    ? "bg-white/30 backdrop-blur-md shadow-2xl scale-110 z-10 ring-1 ring-white border-white"
+                    ? "bg-white/30 backdrop-blur-md shadow-2xl sm:scale-110 z-10 ring-1 ring-white border-white"
                     : "bg-white/5 backdrop-blur-sm hover:bg-white/10"
                 }`}
               >
@@ -70,11 +70,16 @@ export default async function CalendarBanner() {
                 <div className="text-xs opacity-90">{d.dateLabel}</div>
 
                 {run ? (
-                  <div className="mt-2">
-                    <div className="text-base font-bold">{run.time}</div>
-                    <div className="text-xs">{run.title}</div>
-                    <div className="text-[0.7rem] opacity-80">{run.location}</div>
-                  </div>
+                  <>
+                    <div className="mt-2 text-xl sm:hidden" aria-hidden="true">
+                      🏃
+                    </div>
+                    <div className="hidden sm:block mt-2">
+                      <div className="text-base font-bold">{run.time}</div>
+                      <div className="text-xs">{run.title}</div>
+                      <div className="text-[0.7rem] opacity-80">{run.location}</div>
+                    </div>
+                  </>
                 ) : (
                   <div className="mt-3 text-[0.7rem] opacity-40">—</div>
                 )}
